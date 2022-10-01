@@ -1,0 +1,27 @@
+---
+title: "lab4"
+author: "Eric Brian Anil 18MIS1030"
+date: "29/03/2022"
+output: html_document
+---
+
+## ***Lab 4 - One way Anova | CSE3506 Essentials of Data Analytics ***
+
+```{r, echo=TRUE}
+
+rm(list=ls())
+c_group<-read.csv("One way Anova_Football.csv")
+c_group
+summary(c_group)
+boxplot(c_group,ylab="weight",xlab="Teams",col="blue")
+s_grp<-stack(c_group)
+s_grp
+names(s_grp)<-c("weight","Teams")
+s_grp
+anova_result<-aov(weight~Teams,data=s_grp)
+anova_result
+t<-TukeyHSD(anova_result)
+t
+plot(t,col="green")
+
+```
