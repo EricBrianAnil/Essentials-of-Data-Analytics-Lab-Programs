@@ -1,0 +1,28 @@
+---
+title: "Lab1"
+author: "Eric Brian Anil 18MIS1030"
+date: "29/03/2022"
+output: html_document
+---
+
+
+## ***Lab 1 - Linear Regression | CSE3506 Essentials of Data Analytics ***
+
+
+```{r, echo=TRUE}
+
+rm(list=ls())
+ds=read.csv("import d.csv",fileEncoding="UTF-8-BOM")
+names(ds)
+head(ds)
+plot(ds)
+LR_result=lm(y~x,data=ds)
+abline(LR_result,col="green")
+summary(LR_result)
+LR_result
+x=data.frame(x=6:8)
+predict(LR_result,x)
+x=data.frame(x=c(6,7))
+predict(LR_result,x)
+```
+
