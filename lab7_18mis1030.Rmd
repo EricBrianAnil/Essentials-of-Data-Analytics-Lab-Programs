@@ -1,0 +1,33 @@
+---
+title: "lab7"
+author: "Eric Brian Anil 18MIS1030"
+date: "29/03/2022"
+output: html_document
+---
+
+## ***Lab 7 - K medoids clustering | CSE3506 Essentials of Data Analytics ***
+
+```{r, echo=TRUE}
+setwd("D:/vit/Sem8/CSE3506 - Data Analytics/lab")
+rm(list=ls())
+#install.packages("factoextra")
+library(factoextra)
+#install.packages("cluster")
+library(cluster)
+autos_K_Means<- read.csv("seeds_K Means.csv")
+head(autos_K_Means)
+sdf<-autos_K_Means[,c(3,8)]
+head(sdf)
+sdf <- na.omit(sdf)
+sdf <- scale(sdf)
+head(sdf)
+fviz_nbclust(sdf, pam, method = "wss")
+gap_stat <- clusGap(sdf,FUN = pam,K.max = 10,B = 50)
+fviz_gap_stat(gap_stat)
+set.seed(1)
+kmed <- pam(sdf, k = 4)
+kmed
+fviz_cluster(kmed, data = sdf)
+final_data <- cbind(sdf, cluster = kmed$cluster)
+head(final_data)
+```
